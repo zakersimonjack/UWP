@@ -28,13 +28,13 @@
     <AppXManifest Include="D:\编程文件\超市管理系统\超市管理系统\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-11-29T08:00:53.259</Modified>
+      <Modified>2016-11-29T14:53:49.135</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\编程文件\超市管理系统\超市管理系统\bin\x86\Debug\超市管理系统.exe">
       <PackagePath>entrypoint\超市管理系统.exe</PackagePath>
-      <Modified>2016-11-29T08:00:52.715</Modified>
+      <Modified>2016-11-29T14:53:48.185</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Administrator\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -600,11 +600,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\编程文件\超市管理系统\超市管理系统\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-11-24T14:13:00.604</Modified>
+      <Modified>2016-11-29T14:53:48.914</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\编程文件\超市管理系统\超市管理系统\bin\x86\Debug\Core\超市管理系统.exe">
       <PackagePath>超市管理系统.exe</PackagePath>
-      <Modified>2016-11-29T08:00:53.255</Modified>
+      <Modified>2016-11-29T14:53:49.131</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
