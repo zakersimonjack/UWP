@@ -95,11 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commoditycontrol.cs" />
     <Compile Include="Converter\VoucherDescConverter.cs" />
     <Compile Include="Converter\VoucherTypeConverter.cs" />
     <Compile Include="Income.xaml.cs">
       <DependentUpon>Income.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogControl.cs" />
     <Compile Include="Main2.xaml.cs">
       <DependentUpon>Main2.xaml</DependentUpon>
     </Compile>
@@ -114,6 +116,7 @@
     <Compile Include="sellPage.xaml.cs">
       <DependentUpon>sellPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Struct&amp;enum.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
