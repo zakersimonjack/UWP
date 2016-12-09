@@ -34,4 +34,13 @@ namespace 超市管理系统 {
         public float inMoney;
         public float outMoney;
     }
+
+    enum Level { buyer, seller, manager}
+
+    struct Person {
+        public Level level; 
+        public string loginName;
+        public string password;
+        public string name;
+    }
 }

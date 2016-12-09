@@ -6,31 +6,61 @@ using System.Threading.Tasks;
 
 namespace 超市管理系统 {
     class CommodityControl {
+
+        /// <summary>
+        /// 进货
+        /// </summary>
+        /// <param name="Mes">进货信息</param>
+        /// <returns></returns>
         public stockCode Stock(LogMessage Mes) {
-            if (!Mes.mes) return stockCode.parsError;
+            if (!Mes.flag) return stockCode.parsError;
             if (!Mes.commodityName.Equals(DB.query(Mes.id))) return stockCode.repeat;
             if (!DB.addLog()) return stockCode.serverError;
             return stockCode.success;
         }
 
+        /// <summary>
+        /// 根据商品id查看商品信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public CommodityMessage getCommodityMessage(string id) {
 
         }
 
+        /// <summary>
+        /// 添加售货信息
+        /// </summary>
+        /// <param name="Mes"></param>
+        /// <returns></returns>
         public bool sellCommodity(LogMessage Mes) {
-            
+            return true;
         }
 
+        /// <summary>
+        /// 返回所有商品信息
+        /// </summary>
+        /// <returns></returns>
         public List<CommodityMessage> getAllCommodityMessage() {
-
+            return new List<超市管理系统.CommodityMessage>();
         }
 
-        public bool modifyCommodity(CommodityMessage Mes) {
-
+        /// <summary>
+        /// 修改商品价格
+        /// </summary>
+        /// <param name="Mes"></param>
+        /// <returns></returns>
+        public bool modifyPrice(CommodityMessage Mes) {
+            return true;
         }
 
-        public bool clearRepo(int num) {
-
+        /// <summary>
+        /// 减少某商品的数量
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public bool clearRepo(int id, int num) {
+            return true;
         }
 
     }
