@@ -102,6 +102,7 @@
       <DependentUpon>Income.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogControl.cs" />
+    <Compile Include="LoginControl.cs" />
     <Compile Include="Main2.xaml.cs">
       <DependentUpon>Main2.xaml</DependentUpon>
     </Compile>

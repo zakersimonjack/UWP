@@ -18,7 +18,11 @@ namespace 超市管理系统 {
 
         }
 
-        public Money getAmountofMoney() {
+        /// <summary>
+        /// 返回总的进货金额和销售金额
+        /// </summary>
+        /// <returns></returns>
+        public Money getAmountOfMoney() {
 
         }
     }
