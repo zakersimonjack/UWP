@@ -5,45 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace 超市管理系统 {
-    class CommodityControl {
-
-        /// <summary>
-        /// 进货
-        /// </summary>
-        /// <param name="id">对于已存在的商品,comId默认为""</param>
-        /// <returns></returns>
-        public stockCode Stock(string name, int num, float price, DateTime time, string logId, string comId = "") {
-            try {
-                if (comId != "") {
-                    CommodityMessage newCommodity = new CommodityMessage();
-                    newCommodity.commodityName = name;
-                    newCommodity.id = comId;
-                    newCommodity.inPrice = price;
-                    newCommodity.num = num;
-                    DB.addCommodity(newCommodity);
-                }
-                else {
-                    CommodityMessage dbcommodity = DB.findCommodityByName(name);
-                    dbcommodity.num += num;
-                    DB.modityCommodity(dbcommodity);
-                }
-            }
-            catch (RepeatException) {
-                return stockCode.repeat;
-            }
-            catch (NotFindException) {
-                return stockCode.miss;
-            }
-            LogMessage log = new LogMessage();
-            log.commodityName = name;
-            log.flag = true;
-            log.id = logId;
-            log.num = num;
-            log.price = price;
-            log.time = time;
-            DB.addLog(log);
-            return stockCode.success;
-        }
+    class CommodityControl : Control {
 
         /// <summary>
         /// 根据商品id查看商品信息
@@ -61,15 +23,7 @@ namespace 超市管理系统 {
             return result;
         }
 
-        /// <summary>
-        /// 添加售货信息
-        /// </summary>
-        /// <param name="Mes"></param>
-        /// <returns></returns>
-        public bool sellCommodity(LogMessage Mes) {
-            DB.addLog(Mes);
-            return true;
-        }
+
 
         /// <summary>
         /// 返回所有商品信息

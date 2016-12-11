@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace 超市管理系统 {
     class LogControl {
+
         public List<LogMessage> getLogMessageByMonth(DateTime time) {
             return DB.getLogByMonth(time.Year, time.Month);
         }

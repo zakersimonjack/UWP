@@ -15,6 +15,12 @@ namespace 超市管理系统 {
     /// </summary>
     enum stockCode { success, repeat, serverError, parsError, miss} ;
 
+    /// <summary>
+    /// 1：商品数量不够
+    /// 2：商品售价未设置
+    /// 3：未找到相应商品
+    /// </summary>
+    enum sellCode { success, numError, priceError, miss};
     struct CommodityMessage {
         public string commodityName;
         public int num;
@@ -24,7 +30,7 @@ namespace 超市管理系统 {
     }
 
     struct LogMessage {
-        public bool flag;  // flag=ture 为进货
+        public bool flag;  // flag=true 为进货
         public string commodityName;
         public string id;   //暂时不用
         public int num;
@@ -46,7 +52,8 @@ namespace 超市管理系统 {
         public string password;
         public string name;
     }
-    public class ConnectException: ApplicationException
+
+    public class ConnectException: Exception
     {
         public ConnectException()
         {
