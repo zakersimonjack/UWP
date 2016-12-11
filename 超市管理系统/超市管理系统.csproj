@@ -98,6 +98,7 @@
     <Compile Include="Commoditycontrol.cs" />
     <Compile Include="Converter\VoucherDescConverter.cs" />
     <Compile Include="Converter\VoucherTypeConverter.cs" />
+    <Compile Include="DB.cs" />
     <Compile Include="Income.xaml.cs">
       <DependentUpon>Income.xaml</DependentUpon>
     </Compile>

@@ -10,12 +10,38 @@ namespace 超市管理系统 {
         /// <summary>
         /// 进货
         /// </summary>
-        /// <param name="Mes">进货信息</param>
+        /// <param name="id">对于已存在的商品,comId默认为""</param>
         /// <returns></returns>
-        public stockCode Stock(LogMessage Mes) {
-            if (!Mes.flag) return stockCode.parsError;
-            if (!Mes.commodityName.Equals(DB.query(Mes.id))) return stockCode.repeat;
-            if (!DB.addLog()) return stockCode.serverError;
+        public stockCode Stock(string name, int num, float price, DateTime time, string logId, string comId = "") {
+            try {
+                if (comId != "") {
+                    CommodityMessage newCommodity = new CommodityMessage();
+                    newCommodity.commodityName = name;
+                    newCommodity.id = comId;
+                    newCommodity.inPrice = price;
+                    newCommodity.num = num;
+                    DB.addCommodity(newCommodity);
+                }
+                else {
+                    CommodityMessage dbcommodity = DB.findCommodityByName(name);
+                    dbcommodity.num += num;
+                    DB.modityCommodity(dbcommodity);
+                }
+            }
+            catch (RepeatException) {
+                return stockCode.repeat;
+            }
+            catch (NotFindException) {
+                return stockCode.miss;
+            }
+            LogMessage log = new LogMessage();
+            log.commodityName = name;
+            log.flag = true;
+            log.id = logId;
+            log.num = num;
+            log.price = price;
+            log.time = time;
+            DB.addLog(log);
             return stockCode.success;
         }
 
@@ -24,8 +50,15 @@ namespace 超市管理系统 {
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public CommodityMessage getCommodityMessage(string id) {
+        public CommodityMessage? getCommodityMessage(string id) {
+            CommodityMessage? result = null;
+            try {
+                result = DB.findCommodityById(id);
+            }
+            catch (NotFindException) {
 
+            }
+            return result;
         }
 
         /// <summary>
@@ -34,6 +67,7 @@ namespace 超市管理系统 {
         /// <param name="Mes"></param>
         /// <returns></returns>
         public bool sellCommodity(LogMessage Mes) {
+            DB.addLog(Mes);
             return true;
         }
 
@@ -42,7 +76,26 @@ namespace 超市管理系统 {
         /// </summary>
         /// <returns></returns>
         public List<CommodityMessage> getAllCommodityMessage() {
-            return new List<超市管理系统.CommodityMessage>();
+            //List<CommodityMessage> result = DB.
+            return new List<CommodityMessage>();
+        }
+
+
+        /// <summary>
+        /// 减少某商品的数量
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns>如果传入的id不正确，或num大于剩余数量则返回false</returns>
+        public bool clearRepo(string id, int num) {
+            try {
+                CommodityMessage com = DB.findCommodityById(id);
+                if (com.num < num) return false;
+                com.num -= num;
+                return DB.modityCommodity(com);
+            }
+            catch (NotFindException) {
+                return false;
+            }
         }
 
         /// <summary>
@@ -51,17 +104,6 @@ namespace 超市管理系统 {
         /// <param name="Mes"></param>
         /// <returns></returns>
         public bool modifyPrice(CommodityMessage Mes) {
-            return true;
+            return DB.modityCommodity(Mes);
         }
-
-        /// <summary>
-        /// 减少某商品的数量
-        /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        public bool clearRepo(int id, int num) {
-            return true;
-        }
-
     }
-}

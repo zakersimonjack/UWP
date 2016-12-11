@@ -22,7 +22,7 @@ namespace 超市管理系统
     /// </summary>
     sealed partial class App : Application
     {
-        public static login loginperson = null;
+        public LoginControl log;
         public string IP = null;
         public string COM = null;
         /// <summary>
