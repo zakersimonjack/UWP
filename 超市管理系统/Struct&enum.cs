@@ -21,6 +21,9 @@ namespace 超市管理系统 {
     /// 3：未找到相应商品
     /// </summary>
     enum sellCode { success, numError, priceError, miss};
+
+    enum flagCode { day, month, year};
+
     struct CommodityMessage {
         public string commodityName;
         public int num;
