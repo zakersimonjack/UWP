@@ -8,25 +8,30 @@ namespace 超市管理系统 {
     class LoginControl {
 
         /// <summary>
-        /// 工厂方法：若传入的用户名和密码正确，则返回一个LogControl类的实例
+        /// 若传入的用户名和密码正确，则返回一个相应的权限的Control类的实例
         /// </summary>
         /// <param name="loginName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static LogControl login(string loginName, string password) {
-            return new 超市管理系统.LogControl();
+        public static Staff login(string loginName, string password) {
+            Person p = DB.getStaff(loginName);
+            Staff c = null;
+            if (p.password.Equals(password)) {    
+                switch (p.level) {
+                    case Level.buyer:
+                        c = new Buyer();
+                        break;
+                    case Level.seller:
+                        c = new Seller();
+                        break;
+                    case Level.manager:
+                        c = new Manager();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return c;
         }
-
-        public bool addStaff(Person p) {
-            return true;
-        }
-
-        public bool deleteStaff(string loginName) {
-            return true;
-        }
-
-        public Person returnPersonMes() {
-            return new Person();
-        }s
     }
 }

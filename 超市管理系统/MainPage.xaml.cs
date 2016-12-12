@@ -22,6 +22,7 @@ namespace 超市管理系统
     /// </summary>
     public sealed partial class MainPage : Page
     {
+       
         public MainPage()
         {
             this.InitializeComponent();
@@ -29,10 +30,11 @@ namespace 超市管理系统
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
+            
             login newlogin = new login();
             newlogin.loginName = loginNameTB.Text;
             newlogin.passWord = passWordTB.Text;
-            App.loginperson = newlogin;
+           // App.loginperson = newlogin;
             Frame root = Window.Current.Content as Frame;
             root.Navigate(typeof(BlankPage1));
         }
