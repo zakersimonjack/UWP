@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="超市管理系统.manageAcount1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:超市管理系统"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
+            <Button x:ConnectionId='15' x:Name="backButton" Margin="12"                          Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
+            <TextBlock Text="管理账号信息" Margin="12,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Pivot x:ConnectionId='1' x:Name="pivot" Grid.Row="1">
+            <PivotItem Header="新增销售员账号:">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Text="姓名:" FontSize="25" Margin="12"/>
+                            <TextBox x:ConnectionId='14' Name="nameTextBox" FontSize="30" Margin="12,0,0,0" InputScope="Chat"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="登陆名字:" FontSize="25" Margin="12"/>
+                            <TextBox x:ConnectionId='13' Name="loginNameTextBox" FontSize="30" Margin="12,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="2">
+                            <TextBlock Text="登陆密码:" FontSize="25" Margin="12"/>
+                            <TextBox x:ConnectionId='12' Name="passwordTextBox" FontSize="30" Margin="12,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal">
+                            <Button x:ConnectionId='10' x:Name="addNewAcount"                            Content="新增" Margin="20" Width="300" FontSize="30"/>
+                            <Button x:ConnectionId='11' x:Name="backout"                       Content="撤销" Margin="20" Width="300" FontSize="30"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="删除销售员信息:">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="现存的销售员：" Margin="30" FontSize="30"></TextBlock>
+                        <ComboBox x:ConnectionId='9' x:Name="nameComboBox" Margin="30" FontSize="30" Width="300"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button x:ConnectionId='7' x:Name="deleteAcount"                            Content="删除" FontSize="40" Width="300" Margin="30"/>
+                        <Button x:ConnectionId='8' x:Name="back" Content="撤销"                       FontSize="40" Width="300" Margin="30"/>
+                    </StackPanel>
+                   
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="修改密码:">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="旧密码：" Margin="12" FontSize="25"/>
+                        <TextBox x:ConnectionId='6' x:Name="oldPasswordTextBox" Margin="12" FontSize="35"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.RowSpan="2">
+                        <TextBlock Text="新密码:" Margin="12" FontSize="25"/>
+                        <TextBox x:ConnectionId='4' x:Name="newPasswordTextBox" Margin="12" FontSize="35"/>
+                        <TextBox x:ConnectionId='5' x:Name="newPasswordAgainTextBox" Margin="12" FontSize="35"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <Button x:ConnectionId='2' x:Name="editButton" Content="修改"                          Margin="20" FontSize="40" Width="300"/>
+                        <Button x:ConnectionId='3' x:Name="backOutButton" Content="退出"                          Margin="20" FontSize="40" Width="300"/>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
+

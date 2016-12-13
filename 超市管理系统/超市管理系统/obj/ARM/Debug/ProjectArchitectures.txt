@@ -1,0 +1,1 @@
+D:\github\UWP\超市管理系统\超市管理系统.csproj;arm
