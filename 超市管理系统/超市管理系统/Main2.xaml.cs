@@ -37,6 +37,7 @@ namespace 超市管理系统
 
             _columnItem.DataContext = this;
             Loaded += MainPage_Loaded;
+            buttonVisiable();
           
         }
         private  void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -48,6 +49,7 @@ namespace 超市管理系统
 
         private async void Income_Tile_Click(object sender, RoutedEventArgs e)
         {
+            
             if (level == Level.buyer)
                 manageFrame.Navigate(typeof(Income));
             else
@@ -71,6 +73,7 @@ namespace 超市管理系统
 
         private async void SearchOfCommodity_Click(object sender, RoutedEventArgs e)
         {
+            
             if (level == Level.manager)
                 manageFrame.Navigate(typeof(manageCMD));
             else
@@ -92,7 +95,7 @@ namespace 超市管理系统
         private async void MouthReport_Click(object sender, RoutedEventArgs e)
         {
             if (level == Level.manager)
-                manageFrame.Navigate(typeof(todayReport));
+                manageFrame.Navigate(typeof(MouthReport));
             else
             {
                 await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
@@ -102,7 +105,7 @@ namespace 超市管理系统
         private async void YearReport_Click(object sender, RoutedEventArgs e)
         {
             if (level == Level.manager)
-                manageFrame.Navigate(typeof(todayReport));
+                manageFrame.Navigate(typeof(YearReport));
             else
             {
                 await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
@@ -179,7 +182,41 @@ namespace 超市管理系统
         {
             switch(App.loginperson.level)
             {
-                case Level.manager: 
+                case Level.manager:
+                    this.Sell_Tile.Visibility= Visibility.Collapsed;
+                    this.Sell_Tile.IsEnabled = false;
+                    this.Income_Tile.Visibility = Visibility.Collapsed;
+                    this.Income_Tile.IsEnabled = false;
+                    this.ManageAccount.Visibility = Visibility.Collapsed;
+                    this.ManageAccount.IsEnabled = false;
+                    break;
+                case Level.buyer:
+                    this.MouthReport.Visibility = Visibility.Collapsed;
+                    this.MouthReport.IsEnabled = false;
+                    this.YearReport.Visibility = Visibility.Collapsed;
+                    this.YearReport.IsEnabled = false;
+                    this.SearchOfCommodity.Visibility = Visibility.Collapsed;
+                    this.SearchOfCommodity.IsEnabled = false;
+                    this.SearchToday.Visibility = Visibility.Collapsed;
+                    this.SearchToday.IsEnabled = false;
+                    this.Sell_Tile.Visibility = Visibility.Collapsed;
+                    this.Sell_Tile.IsEnabled = false;
+                    this.ManageAccount2.Visibility = Visibility.Collapsed;
+                    this.ManageAccount2.IsEnabled = false;
+                    break;
+                case Level.seller:
+                    this.MouthReport.Visibility = Visibility.Collapsed;
+                    this.MouthReport.IsEnabled = false;
+                    this.YearReport.Visibility = Visibility.Collapsed;
+                    this.YearReport.IsEnabled = false;
+                    this.SearchOfCommodity.Visibility = Visibility.Collapsed;
+                    this.SearchOfCommodity.IsEnabled = false;
+                    this.SearchToday.Visibility = Visibility.Collapsed;
+                    this.SearchToday.IsEnabled = false;
+                    this.Income_Tile.Visibility = Visibility.Collapsed;
+                    this.Income_Tile.IsEnabled = false;
+                    this.ManageAccount2.Visibility = Visibility.Collapsed;
+                    this.ManageAccount2.IsEnabled = false;
                     break;
             }
         }

@@ -79,6 +79,9 @@ namespace 超市管理系统
         {
             mouthDisplayList.Clear();
             mouthListView.DataContext = mouthDisplayList;
+            incomeAll.Text = "";
+            sellAll.Text = "";
+            allDB.Text = "";
             PageTitle.Text = year + "年" + mouth + "月";
             List<LogMessage> mouthList = new List<LogMessage>();
             DateTime dt = new DateTime(year,mouth,1);

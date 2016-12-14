@@ -14,7 +14,7 @@
         <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
             <Button x:Name="backButton" Click="backButton_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
             <TextBlock x:Name="PageTitle" Margin="12,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-           
+            <DatePicker  x:Name="mouthPicker" DateChanged="mouthPicker_DateChanged" ></DatePicker>
         </StackPanel>
         <Grid x:Name="ContenPanel" Grid.Row="1" Margin="12 0 0 0">
             <Grid.RowDefinitions>

@@ -34,6 +34,7 @@ namespace 超市管理系统
             {
                 discountComboBox.Items.Add(i + "折");
             }
+            
         }
 
         private async void searchCMDNumber_Click(object sender, RoutedEventArgs e)
@@ -78,7 +79,7 @@ namespace 超市管理系统
         private void appbar_buttonFinish_Click(object sender, RoutedEventArgs e)
         {
 
-            Frame.GoBack();
+            sell();
 
         }
         //返回

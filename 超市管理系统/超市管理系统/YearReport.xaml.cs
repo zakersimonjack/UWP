@@ -41,6 +41,9 @@ namespace 超市管理系统
         {
             yearDisplayList.Clear();
             mouthListView.DataContext = yearDisplayList;
+            incomeAll.Text = "";
+            sellAll.Text = "";
+            allDB.Text = "";
             PageTitle.Text = year + "年";
             List<LogMessage> yearList = new List<LogMessage>();
          

@@ -42,6 +42,7 @@ namespace 超市管理系统
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
+            
             string loginName = loginNameTB.Text;
             string passWord = passWordBox.Password;
             App.loginperson = await LoginControl.login(loginName, passWord);

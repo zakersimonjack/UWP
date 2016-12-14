@@ -10,35 +10,25 @@ namespace 超市管理系统 {
     /// 0:：插入成功
     /// 1：编号重复
     /// 2：服务器错误
-    /// 3：参数有误
-    /// 4：未找到相应商品
+    /// 3: 参数有误
     /// </summary>
-  public  enum stockCode { success, repeat, serverError, parsError, miss} ;
+    enum stockCode { success, repeat, serverError, parsError } ;
 
-    /// <summary>
-    /// 1：商品数量不够
-    /// 2：商品售价未设置
-    /// 3：未找到相应商品
-    /// </summary>
-  public  enum sellCode { success, numError, priceError, miss};
-
- public    enum flagCode { day, month, year};
-
-    public struct CommodityMessage {
+    struct CommodityMessage {
         public string commodityName;
         public int num;
-        public float inPrice;   //最新进价？
+        public float inPrice;
         public float outPrice;
         public string id;
     }
 
-    public struct LogMessage {
-        public bool flag;  // flag=true 为进货
+  public  struct LogMessage {
+        public bool flag;  // flag=1 为进货
         public string commodityName;
-        public string id;   //暂时不用
+        public string id;
         public int num;
-        public float discount;
-        public float price;    //原价
+        public float discount;//进货就为1
+        public float price;    //打完折的价格
         public DateTime time;
     }
 
@@ -46,29 +36,15 @@ namespace 超市管理系统 {
         public float inMoney;
         public float outMoney;
     }
-
-    public enum Level { buyer, seller, manager, nonperson}
-
-  public  struct Person {
-        public Level level; 
+    public enum Level { buyer, seller, manager }
+    public struct Person
+    {
+        public Level level;
         public string loginName;
         public string password;
         public string name;
     }
+    
 
-    public class ConnectException: Exception
-    {
-        public ConnectException()
-        {
 
-        }
-        public ConnectException(string cont, Exception sr):base(cont, sr)
-        {
-
-        }
-    }
-    public class NotFindException : Exception { }
-    public class NotInitException : Exception { }
-    public class FatalSQLException : Exception { }
-    public class RepeatException : Exception { }
 }

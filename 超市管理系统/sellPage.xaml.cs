@@ -44,14 +44,14 @@ namespace 超市管理系统
                 this.Frame.GoBack();
             }
         }
-        private async void appbar_buttonAdd_Click(object sender, RoutedEventArgs e)
+        private  void appbar_buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             //用于隐藏软键盘
-            Focus(FocusState.Pointer);
+          //  Focus(FocusState.Pointer);
             //await 
         }
         //新增一条记账记录并返回
-        private async void appbar_buttonFinish_Click(object sender, RoutedEventArgs e)
+        private  void appbar_buttonFinish_Click(object sender, RoutedEventArgs e)
         {
             // if (await SaveVoucher())
             // {

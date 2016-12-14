@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,48 +27,29 @@ namespace 超市管理系统
         public MainPage()
         {
             this.InitializeComponent();
-
-            try
-            {
-                DB.init_client();
-            }
-            catch(Exception e)
-            {
-                new MessageDialog("服务器没开启").ShowAsync();
-            }
-            
         }
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
             string loginName = loginNameTB.Text;
             string passWord = passWordBox.Password;
-            App.loginperson = await LoginControl.login(loginName, passWord);
-           
-            if(App.loginperson != null)
+            LoginControl logcontroll = null;
+            logcontroll=LoginControl.login(loginName, passWord);
+            if(logcontroll!=null)
             {
-                switch (App.loginperson.level) {
-                    case Level.buyer:
-                        App.loginperson = (Buyer)App.loginperson;
-                        break;
-                    case Level.seller:
-                        App.loginperson = (Seller)App.loginperson;
-                        break;
-                    case Level.manager:
-                        App.loginperson = (Manager)App.loginperson;
-                        break;
-                    default:
-                        break;
-                }
-                Frame root = Window.Current.Content as Frame;
-                root.Navigate(typeof(BlankPage1));
+                Person nowPerson = new Person();
+                nowPerson = logcontroll.returnPersonMes();
+                App.loginperson = nowPerson;
+                //loginperson = nowPerson;
+            Frame root = Window.Current.Content as Frame;
+            root.Navigate(typeof(BlankPage1));
             }
             else
             {
                 var dialog = new ContentDialog()
                 {
                     Title = "错误提示：",
-                    Content = "请填完整或密码错误",
+                    Content = "",
                     PrimaryButtonText = "确定",
                     SecondaryButtonText = "取消",
                     FullSizeDesired = false,

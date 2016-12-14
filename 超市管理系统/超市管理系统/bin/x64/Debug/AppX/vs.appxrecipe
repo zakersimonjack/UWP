@@ -28,13 +28,13 @@
     <AppXManifest Include="D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-12-13T10:18:33.094</Modified>
+      <Modified>2016-12-14T08:14:01.430</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\超市管理系统.exe">
       <PackagePath>entrypoint\超市管理系统.exe</PackagePath>
-      <Modified>2016-12-13T10:18:32.403</Modified>
+      <Modified>2016-12-14T08:14:00.741</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Administrator\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -592,7 +592,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\超市管理系统.xr.xml">
       <PackagePath>超市管理系统.xr.xml</PackagePath>
-      <Modified>2016-12-13T10:01:54.139</Modified>
+      <Modified>2016-12-14T06:29:34.272</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -600,11 +600,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-12-13T10:05:20.105</Modified>
+      <Modified>2016-12-14T08:14:01.325</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\Core\超市管理系统.exe">
       <PackagePath>超市管理系统.exe</PackagePath>
-      <Modified>2016-12-13T10:18:33.091</Modified>
+      <Modified>2016-12-14T08:14:01.427</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -74,9 +74,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="售货信息：" Margin="12,5,0,0" FontSize="18"></TextBlock>
                         <TextBlock Text="商品价格：" FontSize="20" Grid.Row="1" Margin="12,0,0,0"/>
-                        <TextBlock x:ConnectionId='6' x:Name="priceOfCMDTextBlock"  Grid.Row="1" Grid.Column="1" FontSize="20"/>
+                        <TextBlock x:ConnectionId='6' x:Name="priceOfCMDTextBlock" Text="!" Grid.Row="1" Grid.Column="1" FontSize="20"/>
                         <TextBlock Text="商品剩余数量" FontSize="20" Grid.Row="2" Margin="12,0,0,0"/>
-                        <TextBlock x:ConnectionId='7' x:Name="remainNumsTextblock"  Grid.Row="2" Grid.Column="1" FontSize="20"/>
+                        <TextBlock x:ConnectionId='7' x:Name="remainNumsTextblock" Text="1" Grid.Row="2" Grid.Column="1" FontSize="20"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="4">

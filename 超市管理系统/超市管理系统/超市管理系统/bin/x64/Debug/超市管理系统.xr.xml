@@ -8,8 +8,8 @@
     <RootPropertyPathName Name="codeOfCMD" />
     <RootPropertyPathName Name="nameOfCMD" />
     <RootPropertyPathName Name="Type" />
-    <RootPropertyPathName Name="SummaryMoneyOfInCommodity" />
     <RootPropertyPathName Name="SummaryMoneyOfSellCommodity" />
+    <RootPropertyPathName Name="SummaryMoneyOfInCommodity" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -104,7 +104,6 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Name" />
-      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
@@ -170,24 +169,18 @@
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="Margin" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Width" />
       <RootProperty Name="Name" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootProperty Name="Content" />
+    </RootType>
     <RootType FullName="超市管理系统.manageAcount1" />
     <RootType FullName="超市管理系统.manageCMD" />
-    <RootType FullName="超市管理系统.modifyPassword" />
     <RootType FullName="超市管理系统.MouthReport" />
     <RootType FullName="超市管理系统.sellPage" />
-    <RootType FullName="超市管理系统.todayReport" />
-    <RootType FullName="超市管理系统.YearReport" />
   </Roots.RootTypes>
 </Roots>

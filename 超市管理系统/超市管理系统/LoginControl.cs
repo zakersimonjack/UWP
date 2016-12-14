@@ -20,7 +20,7 @@ namespace 超市管理系统 {
             {
                 p = await DB.getStaff(loginName);
             }
-            catch (NotFindException)
+            catch (Exception)
             {
                 return null;
             }
