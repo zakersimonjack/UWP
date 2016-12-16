@@ -48,7 +48,7 @@
                     
                 </StackPanel>
             </Hub.Header>
-            <HubSection x:ConnectionId='6' x:Name="_columnItem" Foreground="Black">
+            <HubSection x:ConnectionId='4' x:Name="_columnItem" Foreground="Black">
                 <DataTemplate>
                     <Grid>
 
@@ -64,35 +64,31 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid x:Name="StackPanel1"  Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:ConnectionId='12' x:Name="ManageAccount"                             Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/setlogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="管理账号" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
-                                </Grid>
-                            </Button>
-                            <Button x:ConnectionId='13' x:Name="Sell_Tile"                         Style="{StaticResource ButtonStyle1}" Grid.Column="1">
-                                <Grid>
-                                    <Image Source="Images/outlogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="售货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
-                                    <TextBlock Text="{Binding SummaryMoneyOfSellCommodity}" x:Name="SummaryMoneyOfSellCommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"></TextBlock>
-                                </Grid>
-                            </Button>
-                        </Grid>
-
-                        <StackPanel x:Name="StackPanel2" Orientation="Horizontal" Margin="0,12" Grid.Row="1">
-                            <Button x:ConnectionId='10' x:Name="Income_Tile"                           Style="{StaticResource ButtonStyle1}" Margin="0,2,0,-2">
+                        <StackPanel x:Name="StackPanel1" Orientation="Horizontal" Grid.Row="0">
+                            <Button x:ConnectionId='11' x:Name="Income_Tile"                           Style="{StaticResource ButtonStyle1}">
                                 <Grid>
                                     <Image Source="Images/inlogo.png" Stretch="Fill"/>
                                     <TextBlock Text="进货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
                                     <TextBlock Text="{Binding SummaryMoneyOfInCommodity}" x:Name="SummaryMoneyOfcommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"/>
                                 </Grid>
                             </Button>
-                            <Button x:ConnectionId='11' x:Name="SearchToday"                           Style="{StaticResource ButtonStyle1}">
+                            <Button x:ConnectionId='12' x:Name="Sell_Tile"                         Style="{StaticResource ButtonStyle1}">
+                                <Grid>
+                                    <Image Source="Images/outlogo.png" Stretch="Fill"/>
+                                    <TextBlock Text="售货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                                    <TextBlock Text="{Binding SummaryMoneyOfSellCommodity}" x:Name="SummaryMoneyOfSellCommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"></TextBlock>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel x:Name="StackPanel2" Orientation="Horizontal" Margin="0,12" Grid.Row="1">
+                            <Button x:ConnectionId='9' x:Name="SearchOfCommodity"                                 Style="{StaticResource ButtonStyle1}" >
+                                <Grid>
+                                    <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
+                                    <TextBlock Text="管理商品" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button x:ConnectionId='10' x:Name="SearchToday"                           Style="{StaticResource ButtonStyle1}">
                                 <Grid>
                                     <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
                                     <TextBlock Text="查询当天详情" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
@@ -100,13 +96,13 @@
                             </Button>
                         </StackPanel>
                         <StackPanel x:Name="Stackpanel3" Grid.Row="3" Orientation="Horizontal" Margin="0,12">
-                            <Button x:ConnectionId='8' x:Name="MouthReport"                           Style="{StaticResource ButtonStyle1}">
+                            <Button x:ConnectionId='7' x:Name="MouthReport"                           Style="{StaticResource ButtonStyle1}">
                                 <Grid>
                                     <Image Source="Images/mlogo.png" Stretch="Fill"></Image>
                                     <TextBlock Text="月报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" FontSize="20"></TextBlock>
                                 </Grid>
                             </Button>
-                            <Button x:ConnectionId='9' x:Name="YearReport"                          Style="{StaticResource ButtonStyle1}">
+                            <Button x:ConnectionId='8' x:Name="YearReport"                          Style="{StaticResource ButtonStyle1}">
                                 <Grid>
                                     <Image Source="Images/ylogo.png" Stretch="Fill"/>
                                     <TextBlock Text="年报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
@@ -114,10 +110,16 @@
                             </Button>
                         </StackPanel>
                         <StackPanel x:Name="StackPanel3" Grid.Row="4" Orientation="Horizontal">
-                            <Button x:ConnectionId='7' x:Name="SearchOfCommodity"                                 Style="{StaticResource ButtonStyle1}" >
+                            <Button x:ConnectionId='5' x:Name="Chart"                     Style="{StaticResource ButtonStyle1}">
                                 <Grid>
-                                    <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
-                                    <TextBlock Text="管理商品" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                                    <Image Source="Images/piclogo.png" Stretch="Fill"></Image>
+                                    <TextBlock Text="图表分析" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
+                                </Grid>
+                            </Button>
+                            <Button x:ConnectionId='6' x:Name="ManageAccount"                             Style="{StaticResource ButtonStyle1}">
+                                <Grid>
+                                    <Image Source="Images/setlogo.png" Stretch="Fill"/>
+                                    <TextBlock Text="管理账号" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
                                 </Grid>
                             </Button>
                         </StackPanel>
@@ -175,10 +177,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                <TextBlock x:ConnectionId='4' Text="今日流水账：" Margin="12" FontSize="35"                                              />
-                    <Button x:ConnectionId='5' x:Name="backButton" Margin="550,0,0,0"                           Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
-                </StackPanel>
+                <TextBlock Text="今日流水账：" Margin="12" FontSize="35"/>
                 <StackPanel Orientation="Horizontal">
                    
                         <TextBlock  Foreground="#FFEB6416" Text="类型" Width="80"/>
