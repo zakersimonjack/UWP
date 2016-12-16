@@ -13,19 +13,30 @@ namespace 超市管理系统 {
         /// <param name="loginName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static Staff login(string loginName, string password) {
-            Person p = DB.getStaff(loginName);
+        public static async Task<Staff> login(string loginName, string password)
+        {
+            Person p;
+            try
+            {
+                p = await DB.getStaff(loginName);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             Staff c = null;
-            if (p.password.Equals(password)) {    
-                switch (p.level) {
+            if (p.password.Equals(password))
+            {
+                switch (p.level)
+                {
                     case Level.buyer:
-                        c = new Buyer();
+                        c = new Buyer(p.level, loginName, password, p.name);
                         break;
                     case Level.seller:
-                        c = new Seller();
+                        c = new Seller(p.level, loginName, password, p.name);
                         break;
                     case Level.manager:
-                        c = new Manager();
+                        c = new Manager(p.level, loginName, password, p.name);
                         break;
                     default:
                         break;

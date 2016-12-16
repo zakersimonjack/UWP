@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace 超市管理系统 {
     class Manager : Staff{
-        public Manager() {
-            level = Level.manager;
+        public Manager(Level level, string loginName, string password, string name) : base(level, loginName, password, name)
+        {
         }
 
         public bool addStaff(Person p) {
@@ -21,7 +21,6 @@ namespace 超市管理系统 {
         }
 
         public bool deleteStaff(string loginName) {
-            if (level != Level.manager) return false;
             try {
                 DB.deleteStaff(loginName);
             }
@@ -29,6 +28,21 @@ namespace 超市管理系统 {
                 return false;
             }
             return true;
+        }
+
+      
+        public bool modifyPassword(Person p, string newpass)
+        {
+            try
+            {
+                p.password = newpass;
+                DB.modifyStaff(p);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -49,8 +63,14 @@ namespace 超市管理系统 {
         /// </summary>
         /// <returns></returns>
         public List<CommodityMessage> getAllCommodityMessage() {
-            //List<CommodityMessage> result = DB.
-            return new List<CommodityMessage>();
+            try
+            {
+                return DB.getAllCommodity();
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -59,7 +79,15 @@ namespace 超市管理系统 {
         /// <param name="Mes"></param>
         /// <returns></returns>
         public bool modifyPrice(CommodityMessage Mes) {
-            return DB.modityCommodity(Mes);
+            try
+            {
+                DB.modityCommodity(Mes);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -83,7 +111,44 @@ namespace 超市管理系统 {
         /// </summary>
         /// <returns></returns>
         public List<LogMessage> getLogMessageByMonth(DateTime time) {
-            return DB.getLogByMonth(time.Year, time.Month);
+            List<LogMessage> ls = new List<LogMessage>();
+            try
+            {
+                ls=DB.getLogByMonth(time.Year, time.Month);
+                return ls;
+            }
+            catch(NotFindException e)
+            {
+                return null;
+            }
+        }
+        public List<LogMessage> getLogMessageByYear(DateTime time)
+        {
+            List<LogMessage> ls = new List<LogMessage>();
+            try
+            {
+                 ls=DB.getLogByYear(time.Year);
+                return ls;
+            }
+            catch (NotFindException e)
+            {
+                return null;
+            }
+            
+        }
+        public List<LogMessage> getLogMessageByDay(DateTime time)
+        {
+            List<LogMessage> ls = new List<LogMessage>();
+            try
+            {
+                 ls=DB.getLogByDay(time.Year, time.Month, time.Day);
+                return ls;
+            }
+            catch (NotFindException e)
+            {
+                return null;
+            }
+           
         }
 
         /// <summary>
@@ -116,18 +181,26 @@ namespace 超市管理系统 {
 
         public Money getAmountOfMoney(DateTime time, flagCode code) {
             Money money = new 超市管理系统.Money();
-            switch (code) {
-                case flagCode.day:
-                    money = DB.getAmountOfMoneyByDay(time.Year, time.Month, time.Day);
-                    break;
-                case flagCode.month:
-                    money = DB.getAmountOfMoneyByMonth(time.Year, time.Month);
-                    break;
-                case flagCode.year:
-                    money = DB.getAmountOfMoneyByYear(time.Year);
-                    break;
-                default:
-                    break;
+            try
+            {
+                switch (code)
+                {
+                    case flagCode.day:
+                        money = DB.getAmountOfMoneyByDay(time.Year, time.Month, time.Day);
+                        break;
+                    case flagCode.month:
+                        money = DB.getAmountOfMoneyByMonth(time.Year, time.Month);
+                        break;
+                    case flagCode.year:
+                        money = DB.getAmountOfMoneyByYear(time.Year);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                
             }
             return money;
         }

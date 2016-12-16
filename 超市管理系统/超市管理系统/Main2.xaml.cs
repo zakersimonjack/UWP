@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,9 +24,9 @@ namespace 超市管理系统
     /// </summary>
     public sealed partial class BlankPage1 : Page, INotifyPropertyChanged
     {
-        Level level = App.loginperson.level;
         public ObservableCollection<todayLogMessage> Today = new ObservableCollection<todayLogMessage>();
         private Frame manageFrame=null;
+        private ObservableCollection<todayLogMessage> today = new ObservableCollection<todayLogMessage>();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public BlankPage1()
@@ -37,91 +36,54 @@ namespace 超市管理系统
 
             _columnItem.DataContext = this;
             Loaded += MainPage_Loaded;
-            buttonVisiable();
           
         }
-        private  void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-
             getMessage();
          todayListView.DataContext = Today;
         }
 
-        private async void Income_Tile_Click(object sender, RoutedEventArgs e)
+        private void Income_Tile_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (level == Level.buyer)
-                manageFrame.Navigate(typeof(Income));
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
+
+            manageFrame.Navigate(typeof(Income));
         }
 
-        private async void Sell_Tile_Click(object sender, RoutedEventArgs e)
+        private void Sell_Tile_Click(object sender, RoutedEventArgs e)
         {
-            if (level == Level.seller)
-                manageFrame.Navigate(typeof(sellPage));
-
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
-
+            manageFrame.Navigate(typeof(sellPage));
         }
 
 
-        private async void SearchOfCommodity_Click(object sender, RoutedEventArgs e)
+        private void SearchOfCommodity_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (level == Level.manager)
-                manageFrame.Navigate(typeof(manageCMD));
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
+            manageFrame.Navigate(typeof(manageCMD));
         }
 
-        private async void SearchToday_Click(object sender, RoutedEventArgs e)
+        private void SearchToday_Click(object sender, RoutedEventArgs e)
         {
-            if (level == Level.manager)
-                manageFrame.Navigate(typeof(todayReport));
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
+
         }
 
-        private async void MouthReport_Click(object sender, RoutedEventArgs e)
+        private void MouthReport_Click(object sender, RoutedEventArgs e)
         {
-            if (level == Level.manager)
-                manageFrame.Navigate(typeof(MouthReport));
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
+            manageFrame.Navigate(typeof(MouthReport));
         }
 
-        private async void YearReport_Click(object sender, RoutedEventArgs e)
+        private void YearReport_Click(object sender, RoutedEventArgs e)
         {
-            if (level == Level.manager)
-                manageFrame.Navigate(typeof(YearReport));
-            else
-            {
-                await new MessageDialog("对不起，您权限不足以用此功能").ShowAsync();
-            }
+
         }
 
+        private void Chart_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
         private void ManageAccount_Click(object sender, RoutedEventArgs e)
         {
-            if(level==Level.manager)
             manageFrame.Navigate(typeof(manageAcount1));
-            else
-            {
-                manageFrame.Navigate(typeof(modifyPassword));
-            }
         }
 
         private void logout_Click(object sender, RoutedEventArgs e)
@@ -162,64 +124,6 @@ namespace 超市管理系统
                      
            }
           
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void backButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.Frame.CanGoBack)
-            {
-                App.loginperson = null;
-                App.todayLogMessage.Clear();
-                this.Frame.GoBack();
-            }
-        }
-        private void buttonVisiable()
-        {
-            switch(App.loginperson.level)
-            {
-                case Level.manager:
-                    this.Sell_Tile.Visibility= Visibility.Collapsed;
-                    this.Sell_Tile.IsEnabled = false;
-                    this.Income_Tile.Visibility = Visibility.Collapsed;
-                    this.Income_Tile.IsEnabled = false;
-                    this.ManageAccount.Visibility = Visibility.Collapsed;
-                    this.ManageAccount.IsEnabled = false;
-                    break;
-                case Level.buyer:
-                    this.MouthReport.Visibility = Visibility.Collapsed;
-                    this.MouthReport.IsEnabled = false;
-                    this.YearReport.Visibility = Visibility.Collapsed;
-                    this.YearReport.IsEnabled = false;
-                    this.SearchOfCommodity.Visibility = Visibility.Collapsed;
-                    this.SearchOfCommodity.IsEnabled = false;
-                    this.SearchToday.Visibility = Visibility.Collapsed;
-                    this.SearchToday.IsEnabled = false;
-                    this.Sell_Tile.Visibility = Visibility.Collapsed;
-                    this.Sell_Tile.IsEnabled = false;
-                    this.ManageAccount2.Visibility = Visibility.Collapsed;
-                    this.ManageAccount2.IsEnabled = false;
-                    break;
-                case Level.seller:
-                    this.MouthReport.Visibility = Visibility.Collapsed;
-                    this.MouthReport.IsEnabled = false;
-                    this.YearReport.Visibility = Visibility.Collapsed;
-                    this.YearReport.IsEnabled = false;
-                    this.SearchOfCommodity.Visibility = Visibility.Collapsed;
-                    this.SearchOfCommodity.IsEnabled = false;
-                    this.SearchToday.Visibility = Visibility.Collapsed;
-                    this.SearchToday.IsEnabled = false;
-                    this.Income_Tile.Visibility = Visibility.Collapsed;
-                    this.Income_Tile.IsEnabled = false;
-                    this.ManageAccount2.Visibility = Visibility.Collapsed;
-                    this.ManageAccount2.IsEnabled = false;
-                    break;
-            }
-        }
-
+        } 
     }
 }

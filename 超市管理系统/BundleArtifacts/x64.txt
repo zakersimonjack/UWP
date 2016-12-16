@@ -1,0 +1,2 @@
+MainPackage=D:\git\新建文件夹\UWP\超市管理系统\bin\x64\Debug\超市管理系统_1.0.2.0_x64_Debug.appx
+SymbolPackage=D:\git\新建文件夹\UWP\超市管理系统\AppPackages\超市管理系统_1.0.2.0_Debug_Test\超市管理系统_1.0.2.0_x64_Debug.appxsym

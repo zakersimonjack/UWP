@@ -17,30 +17,10 @@
             <TextBlock Text="管理账号信息" Margin="12,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Pivot x:Name="pivot" Grid.Row="1">
-          
-            <PivotItem Header="删除销售员信息:">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-                        <TextBlock Text="现存的员工：" Margin="30" FontSize="30"></TextBlock>
-                        <ComboBox x:Name="nameComboBox" Margin="30" FontSize="30" Width="300"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Button x:Name="deleteAcount" Click="deleteAcount_Click" Content="删除" FontSize="40" Width="300" Margin="30"/>
-                        <Button x:Name="back" Content="撤销" Click="backout_Click" FontSize="40" Width="300" Margin="30"/>
-                    </StackPanel>
-                   
-                </Grid>
-            </PivotItem>
             <PivotItem Header="新增销售员账号:">
                 <ScrollViewer>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
@@ -63,19 +43,30 @@
                             <TextBlock Text="再次输入密码:" FontSize="25" Margin="12"/>
                             <PasswordBox Name="passwordAgainTextBox" FontSize="30" Margin="12,0,0,0" />
                         </StackPanel>
-                        <StackPanel Grid.Row="4" Orientation="Vertical">
-                            <TextBlock Text="请选择该账号权限" FontSize="15" Margin="12"/>
-
-                            <RadioButton x:Name="sellerRadionButton"  Content="售货员" />
-                            <RadioButton x:Name="buyerRadioButton" Content="进货员"/>
-
-                        </StackPanel>
-                        <StackPanel Grid.Row="5" Orientation="Horizontal">
+                        <StackPanel Grid.Row="4" Orientation="Horizontal">
                             <Button x:Name="addNewAcount" Click="addNewAcount_Click" Content="新增" Margin="20" Width="300" FontSize="30"/>
                             <Button x:Name="backout" Click="backout_Click" Content="撤销" Margin="20" Width="300" FontSize="30"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="删除销售员信息:">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="现存的销售员：" Margin="30" FontSize="30"></TextBlock>
+                        <ComboBox x:Name="nameComboBox" Margin="30" FontSize="30" Width="300"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button x:Name="deleteAcount" Click="deleteAcount_Click" Content="删除" FontSize="40" Width="300" Margin="30"/>
+                        <Button x:Name="back" Content="撤销" Click="backout_Click" FontSize="40" Width="300" Margin="30"/>
+                    </StackPanel>
+                   
+                </Grid>
             </PivotItem>
             <PivotItem Header="修改密码:">
                 <Grid>

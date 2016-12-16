@@ -27,13 +27,13 @@
             </Grid.ColumnDefinitions>
             <Grid  Grid.Column="1" Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
@@ -49,15 +49,15 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="商品编号：" Margin="12,5,0,0" FontSize="20"/>
-                    <TextBox x:ConnectionId='9' x:Name="codeOfCMDTextbox" Grid.Row="1" Margin="12,0,12,5"/>
+                    <TextBox x:ConnectionId='9' x:Name="codeOfCMDTextbox" Grid.Row="1" Margin="12,5,12,10"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="请根据编号查商品！" Margin="12,5,0,0" FontSize="18" Foreground="Gray" />
-                    <Button x:ConnectionId='8' x:Name="searchCMDNumber"                               Margin="12,5,12,0" Grid.Row="1"  >
+                    <TextBlock Text="名称与编号值不全为空即可查询！" Margin="12,5,0,0" FontSize="18" Foreground="Gray" />
+                    <Button x:ConnectionId='8' x:Name="searchCMDNumber"                               Margin="12,5,12,0" Grid.Row="1" Style="{StaticResource retangleButtonStyle}" >
                         <TextBlock Text="查询商品" FontSize="25"/>
                     </Button>
                 </Grid>
@@ -74,9 +74,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="售货信息：" Margin="12,5,0,0" FontSize="18"></TextBlock>
                         <TextBlock Text="商品价格：" FontSize="20" Grid.Row="1" Margin="12,0,0,0"/>
-                        <TextBlock x:ConnectionId='6' x:Name="priceOfCMDTextBlock"  Grid.Row="1" Grid.Column="1" FontSize="20"/>
+                        <TextBlock x:ConnectionId='6' x:Name="priceOfCMDTextBlock" Text="!" Grid.Row="1" Grid.Column="1" FontSize="20"/>
                         <TextBlock Text="商品剩余数量" FontSize="20" Grid.Row="2" Margin="12,0,0,0"/>
-                        <TextBlock x:ConnectionId='7' x:Name="remainNumsTextblock"  Grid.Row="2" Grid.Column="1" FontSize="20"/>
+                        <TextBlock x:ConnectionId='7' x:Name="remainNumsTextblock" Text="1" Grid.Row="2" Grid.Column="1" FontSize="20"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="4">
@@ -104,9 +104,9 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock HorizontalAlignment="Left" Text="日期:" Margin="12" FontSize="20"/>
-                        <DatePicker x:ConnectionId='2' x:Name="DatePicker" Margin="12" Grid.Row="1"></DatePicker>
+                        <DatePicker x:ConnectionId='2' x:Name="DatePicker" Margin="12,0,12,12" Grid.Row="1"></DatePicker>
                         <TextBlock HorizontalAlignment="Left" Text="时间：" Margin="12" FontSize="25" Grid.Column="1"/>
-                        <TimePicker x:ConnectionId='3' x:Name="TimePicker" Margin="12"  Grid.Column="1" Grid.Row="1"/>
+                        <TimePicker x:ConnectionId='3' x:Name="TimePicker" Margin="12" Height="58" Grid.Column="1" Grid.Row="1"/>
                     </Grid>
                   
                 </StackPanel>

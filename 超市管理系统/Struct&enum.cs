@@ -13,18 +13,18 @@ namespace 超市管理系统 {
     /// 3：参数有误
     /// 4：未找到相应商品
     /// </summary>
-    enum stockCode { success, repeat, serverError, parsError, miss} ;
+  public  enum stockCode { success, repeat, serverError, parsError, miss} ;
 
     /// <summary>
     /// 1：商品数量不够
     /// 2：商品售价未设置
     /// 3：未找到相应商品
     /// </summary>
-    enum sellCode { success, numError, priceError, miss};
+  public  enum sellCode { success, numError, priceError, miss};
 
-    enum flagCode { day, month, year};
+ public    enum flagCode { day, month, year};
 
-    struct CommodityMessage {
+    public struct CommodityMessage {
         public string commodityName;
         public int num;
         public float inPrice;   //最新进价？
@@ -32,7 +32,7 @@ namespace 超市管理系统 {
         public string id;
     }
 
-    struct LogMessage {
+    public struct LogMessage {
         public bool flag;  // flag=true 为进货
         public string commodityName;
         public string id;   //暂时不用
@@ -47,9 +47,9 @@ namespace 超市管理系统 {
         public float outMoney;
     }
 
-    enum Level { buyer, seller, manager, nonperson}
+    public enum Level { buyer, seller, manager, nonperson}
 
-    struct Person {
+  public  struct Person {
         public Level level; 
         public string loginName;
         public string password;

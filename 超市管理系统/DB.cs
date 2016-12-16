@@ -1,59 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.IO;
+using Windows.UI.Popups;
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
+using System.Diagnostics;
 //using System.Windows.Forms;
-namespace 超市管理系统{
-    class DB {
-        
+namespace 超市管理系统
+{
+    class DB
+    {
+
         private static bool init_flag = false;
         private static bool read_flag = false;
         private static string server_addr = "123.207.114.37";
-        private static int server_port = 1222;
+        private static string server_port = "1222";
         private static string error_str = "SQL wrong!";
         private static string null_str = "(null)";
-        private static TcpClient tcpc = new TcpClient();
+        private static StreamSocket socket = new StreamSocket();
+        private static DataWriter writer = new DataWriter(socket.OutputStream);
         private static Queue<string> buf = new Queue<string>();
-        private static void Listen()
+        private static async void Listen()
         {
             try
             {
-                NetworkStream ns = tcpc.GetStream();
-                StreamReader sr = new StreamReader(ns);
-                while (ns.CanRead)
+
+                DataReader reader = new DataReader(socket.InputStream);
+                reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+                reader.InputStreamOptions = InputStreamOptions.Partial;
+                while (true)
                 {
-                    string tem = sr.ReadLine();
-                    if (string.Compare(tem, 0, "EOF", 0, 3) != 0) buf.Enqueue(tem);
-                    else read_flag = false;
+                    while (!read_flag)
+                    {
+                        await Task.Delay(100);
+                    }
+                    string tem1 = "";
+                    string tem;
+                    await reader.LoadAsync(1024);
+                    tem = reader.ReadString(reader.UnconsumedBufferLength);
+                    tem1 += tem;
+                    
+                    await reader.LoadAsync(1024);
+                    tem = reader.ReadString(reader.UnconsumedBufferLength);
+                    tem1 += tem;
+                    Debug.WriteLine(tem1);
+                    string[] tet = tem1.Split('\n');
+                    foreach (string tete in tet)
+                    {
+                        if (string.Compare(tete, 0, "EOF", 0, 3) != 0)
+                        {
+                            buf.Enqueue(tete);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    } 
+                    read_flag = false;
                 }
+            
             }
             catch (Exception)
             {
                 init_flag = false;
-                MessageBox.Show("监听线程意外中断！", "致命错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                //MessageBox.Show("监听线程意外中断！", "致命错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await new MessageDialog("监听线程意外中断！").ShowAsync();
+
             }
         }
 
         private static void start_thread()
         {
-            Thread l_thread = new Thread(new ThreadStart(Listen));
-            l_thread.IsBackground = true;
-            l_thread.Start();
+            Task l_thread = Task.Factory.StartNew(delegate { Listen(); });
         }
 
-        private static void send_cmd(string cmd)
+        private static async void send_cmd(string cmd)
         {
-            NetworkStream ns = tcpc.GetStream();
+            
             if (init_flag)
             {
-                Byte[] sendcont = Encoding.UTF8.GetBytes(cmd);
-                ns.Write(sendcont, 0, sendcont.Length);
+
+                writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+                //writer.WriteUInt32(writer.MeasureString(str));
+                writer.WriteString(cmd);
+                await writer.StoreAsync();
             }
         }
 
@@ -87,11 +120,11 @@ namespace 超市管理系统{
             }
         }
 
-        public static bool init_client()
+        public static async Task<bool> init_client()
         {
             try
             {
-                if (tcpc.Connected == false) tcpc.Connect(server_addr, server_port);
+                await socket.ConnectAsync(new Windows.Networking.HostName(server_addr), server_port);
                 start_thread();
             }
             catch (SocketException e)
@@ -101,12 +134,13 @@ namespace 超市管理系统{
             init_flag = true;
             return true;
         }
-
+        /*
         public static bool close_client()
         {
             try
             {
-                tcpc.Close();
+                //tcpc.Close();
+                socket.Dispose();
             }
             catch (SocketException)
             {
@@ -115,7 +149,7 @@ namespace 超市管理系统{
             init_flag = false;
             return true;
         }
-
+        */
         public static void ExecuteSQL(string cmd)
         {
             if (!init_flag) throw new NotInitException();
@@ -129,7 +163,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from comodity where cid = '" + com.id + "'");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) != 0) throw new RepeatException();
             send_cmd("Insert into comodity(name, cid, nums, inprice, outprice) values('" + com.commodityName + "','" + com.id + "','" + com.num.ToString() + "','" + com.inPrice.ToString() + "','" + com.outPrice.ToString() + "');");
@@ -143,7 +177,8 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from comodity where cid = '" + id + "'");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) //Task.Delay(100);
+                Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
             buf.Dequeue();
@@ -163,7 +198,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from comodity where name = '" + name + "'");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
             buf.Dequeue();
@@ -191,7 +226,57 @@ namespace 超市管理系统{
             send_cmd("delete from comodity where cid = '" + id + "'");
             return true;
         }
+        public static List<CommodityMessage> getAllCommodity()
 
+        {
+
+            List<CommodityMessage> lmes = new List<CommodityMessage>();
+
+            CommodityMessage cmes = new CommodityMessage();
+
+            int i;
+
+            if (!init_flag) throw new NotInitException();
+
+            read_flag = true;
+
+            buf.Clear();
+
+            send_cmd("select * from comodity");
+
+            while (read_flag) Task.Delay(100);
+
+            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+
+            if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
+
+            buf.Dequeue();
+
+            for (; i > 0; i--)
+
+            {
+
+                cmes.commodityName = buf.Dequeue();
+
+                cmes.id = buf.Dequeue();
+
+                cmes.inPrice = Convert.ToSingle(buf.Dequeue());
+
+                cmes.outPrice = Convert.ToSingle(buf.Dequeue());
+
+                cmes.num = Convert.ToInt32(buf.Dequeue());
+
+                lmes.Add(cmes);
+
+                //MessageBox.Show(cmes.commodityName + cmes.id);
+
+            }
+
+            return lmes;
+
+
+
+        }
         public static bool addLog(LogMessage logmes)
         {
             if (!init_flag) throw new NotInitException();
@@ -203,7 +288,7 @@ namespace 超市管理系统{
                 logmes.id + "','" +
                 logmes.num.ToString() + "','" +
                 logmes.discount.ToString() + "','" +
-                logmes.price.ToString() + "','" + 
+                logmes.price.ToString() + "','" +
                 logmes.time.Year.ToString() + "','" +
                 logmes.time.Month.ToString() + "','" +
                 logmes.time.Day.ToString() + "','" +
@@ -222,7 +307,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
@@ -247,7 +332,7 @@ namespace 超市管理系统{
                 int thour = Convert.ToInt32(buf.Dequeue());
                 int tminute = Convert.ToInt32(buf.Dequeue());
                 int tsecond = Convert.ToInt32(buf.Dequeue());
-                DateTime tem_date = new DateTime(tyear, tmonth, tday, thour,tminute, tsecond);
+                DateTime tem_date = new DateTime(tyear, tmonth, tday, thour, tminute, tsecond);
                 tem.time = tem_date;
                 int flag = Convert.ToInt32(buf.Dequeue());
                 if (flag == 1) tem.flag = true;
@@ -265,7 +350,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "' and month = '" + month.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
@@ -308,7 +393,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
@@ -371,10 +456,10 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from staff where loginname = '" + p.loginName + "'");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) != 0) throw new RepeatException();
-            send_cmd("Insert into staff(name, pwd, loginname, power) values('" + p.name +"','" + p.password +"','" + p.loginName + "','" + get_level(p.level).ToString() + "');");
+            send_cmd("Insert into staff(name, pwd, loginname, power) values('" + p.name + "','" + p.password + "','" + p.loginName + "','" + get_level(p.level).ToString() + "');");
             return true;
         }
 
@@ -386,17 +471,17 @@ namespace 超市管理系统{
             return true;
         }
 
-        public static Person getStaff(string loginName)
+        public static async Task<Person> getStaff(string loginName)
         {
             if (!init_flag) throw new NotInitException();
             Person staff = new Person();
             read_flag = true;
             buf.Clear();
-            send_cmd("select * from staff where loginname = '" + loginName +"'");
-            while (read_flag) Thread.Sleep(100);
+            send_cmd("select * from staff where loginname = '" + loginName + "'");
+            while (read_flag) await Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
-            buf.Dequeue();
+            string aaa = buf.Dequeue();
             staff.name = buf.Dequeue();
             staff.password = buf.Dequeue();
             staff.loginName = buf.Dequeue();
@@ -412,12 +497,12 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select * from staff");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
             int j = Convert.ToInt32(buf.Dequeue());
-            for (;i > 0;i--)
+            for (; i > 0; i--)
             {
                 Person tem;
                 tem.name = buf.Dequeue();
@@ -444,14 +529,14 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.inMoney = Convert.ToSingle(buf.Dequeue());
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.outMoney = Convert.ToSingle(buf.Dequeue());
@@ -464,14 +549,14 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.inMoney = Convert.ToSingle(buf.Dequeue());
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.outMoney = Convert.ToSingle(buf.Dequeue());
@@ -485,7 +570,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue();
             buf.Dequeue();
@@ -493,7 +578,7 @@ namespace 超市管理系统{
             read_flag = true;
             buf.Clear();
             send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "';");
-            while (read_flag) Thread.Sleep(100);
+            while (read_flag) Task.Delay(100);
             if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue();
             buf.Dequeue();

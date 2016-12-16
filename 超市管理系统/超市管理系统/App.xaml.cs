@@ -7,7 +7,6 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Networking.Sockets;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,7 +22,8 @@ namespace 超市管理系统
     /// </summary>
     sealed partial class App : Application
     {
-        public static Staff loginperson=null;
+       
+        public static Person loginperson;
         public string IP = null;
         public string COM = null;
         public static List<LogMessage> todayLogMessage = new List<LogMessage>();
@@ -33,10 +33,8 @@ namespace 超市管理系统
         /// </summary>
         public App()
         {
-            
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            
         }
 
         /// <summary>

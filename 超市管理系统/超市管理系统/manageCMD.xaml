@@ -53,7 +53,6 @@
             <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
                 <Button x:Name="search" Content="查询该商品信息" Click="search_Click" FontSize="20" Margin="12"/>
                 <Button x:Name="editCMD" Content="修改商品信息" Click="editCMD_Click" FontSize="20" Margin="12" />
-                <Button x:Name="deleteAllCMD" Content="清空该商品的库存" Click="deleteAllCMD_Click" FontSize="20" Margin="12"/>
                 <Button x:Name="backButton2" Content="退出" Click="backButton_Click" FontSize="20" Margin="12"/>
             </StackPanel>
          

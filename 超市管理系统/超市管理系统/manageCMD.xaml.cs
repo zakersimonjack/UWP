@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,7 +24,7 @@ namespace 超市管理系统
     public sealed partial class manageCMD : Page
     {
         List<CommodityMessage> nameList = new List<CommodityMessage>();
-        Manager manager = (Manager)App.loginperson;
+
         public manageCMD()
         {
             addItems();
@@ -53,6 +52,7 @@ namespace 超市管理系统
         {
             bool flag = true;
             float price;
+            int numbers;
             float incomePrice;
             string name = nameComboBox.SelectedItem.ToString();
             if (priceTextBox.Text == "")
@@ -67,6 +67,7 @@ namespace 超市管理系统
             try
             {
                 price = float.Parse(priceTextBox.Text);
+                numbers = int.Parse(numbersTextBox.Text);
                 incomePrice = float.Parse(incomePriceTextBlock.Text);
             }
             catch (FormatException es)
@@ -90,12 +91,12 @@ namespace 超市管理系统
                     }
                 }
                 ms.outPrice = price;
-            
+                ms.num = numbers;
                 //
                 var dialog = new ContentDialog()
                 {
                     Title = "消息提示",
-                    Content = "您要修改" + name + "的售价为:" + price +  "吗",
+                    Content = "您要修改" + name + "的售价为:" + price + "，剩余数量为" + numbers + "吗",
                     PrimaryButtonText = "确定",
                     SecondaryButtonText = "取消",
                     FullSizeDesired = false,
@@ -104,16 +105,8 @@ namespace 超市管理系统
                 dialog.PrimaryButtonClick += async (_s, _e) =>
                 {
 
-                  if(manager.modifyPrice(ms))
-                    {
-                         await new MessageDialog("修改成功").ShowAsync();
-                    }
-                  else
-                    {
-                        await new MessageDialog("修改失败").ShowAsync();
-                    }
-                    
-                 
+                    //在这里写删除函数,信息放在MS中
+                    await new MessageDialog("修改成功").ShowAsync();
                 };
                 await dialog.ShowAsync();
 
@@ -139,89 +132,31 @@ namespace 超市管理系统
             incomePriceTextBlock.Text = ms.inPrice.ToString();
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
         private async void addItems()
         {
-           nameList = manager.getAllCommodityMessage();
-
-            if (nameList != null)
+            Random ran = new Random();
+            CommodityMessage cm = new CommodityMessage();
+            for (int i = 0; i < 5; i++)
             {
-                foreach (var i in nameList)
-                {
-                    string name = i.commodityName;
-                    try
-                    {
-                        if(i.num!=0)
-                        nameComboBox.Items.Add(name);
-                    }
-                    catch (NullReferenceException e)
-                    {
-                        await new MessageDialog("正在加载商品名单").ShowAsync();
-                    }
-                }
+                cm.commodityName = "name" + i;
+                cm.num = ran.Next(1, 500);
+                cm.inPrice = ran.Next();
+                cm.outPrice = ran.Next();
+                nameList.Add(cm);
+            }
+            foreach (var i in nameList)
+            {
+                string name = i.commodityName;
                 try
                 {
-                    if (nameList[0].num != 0)
-                        nameComboBox.Items.Add(nameList[0].commodityName);
+                    nameComboBox.Items.Add(name);
                 }
                 catch (NullReferenceException e)
                 {
-                    Debug.WriteLine(nameList[0].commodityName);
-                }
+                    await new MessageDialog("正在加载商品名单").ShowAsync();
+                } 
+
             }
-            
-            else
-            {
-                await new MessageDialog("服务器错误").ShowAsync();
-            }
-          
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void deleteAllCMD_Click(object sender, RoutedEventArgs e)
-        {
-            string name = nameComboBox.SelectedItem.ToString();
-
-            CommodityMessage ms = new CommodityMessage();
-            foreach (var cm in nameList)
-            {
-                if (cm.commodityName == name)
-                {
-                    ms = cm;
-                    break;
-                }
-            }
-            var dialog = new ContentDialog()
-            {
-                Title = "消息提示",
-                Content = "您要清空" + name + "的库存吗？",
-                PrimaryButtonText = "确定",
-                SecondaryButtonText = "取消",
-                FullSizeDesired = false,
-            };
-
-            dialog.PrimaryButtonClick += async (_s, _e) =>
-            {
-                
-                  if(manager.clearRepo(ms.id))
-                  {
-                      await new MessageDialog("清空"+ms.commodityName+"成功").ShowAsync();
-                  }
-                  else
-                {
-                    await new MessageDialog("清空" + ms.commodityName + "失败").ShowAsync();
-                }
-                  
-               
-            };
-            await dialog.ShowAsync();
-
         }
     }
 }

@@ -14,7 +14,7 @@
         <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
             <Button x:Name="backButton" Click="backButton_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
             <TextBlock x:Name="PageTitle" Margin="12,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <DatePicker  x:Name="mouthPicker" DateChanged="mouthPicker_DateChanged" ></DatePicker>
+            <Button x:Name="deleteLog" Click="deleteLog_Click" Margin="450,0,0,0" Foreground="Red" Content="删除当月日志"/>
         </StackPanel>
         <Grid x:Name="ContenPanel" Grid.Row="1" Margin="12 0 0 0">
             <Grid.RowDefinitions>
@@ -23,68 +23,29 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Background="Blue">
-                    <TextBlock Text="商品编号" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="1" Background="Blue">
-                    <TextBlock Text="商品名称" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="2" Background="Blue">
-                    <TextBlock Text="商品进货量" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="3" Background="Blue">
-                    <TextBlock Text="商品单品进货价" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="4" Background="Blue">
-                    <TextBlock Text="商品销售量" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="5" Background="Blue">
-                    <TextBlock Text="商品单品销售价" Foreground="White"/>
-                </Border>
-                <Border Grid.Column="6" Background="Blue">
-                    <TextBlock Text="收支" Foreground="White"/>
-                </Border>
-            </Grid>
-            <ListView Grid.Row="1" x:Name="listMouthReport" Margin="0,8,0,8">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock  Foreground="#FFEB6416" Text="类型" Width="80"/>
+                <TextBlock  Foreground="#FFEB6416" Text="商品名称" Width="100" />
+                <TextBlock  Foreground="#FFEB6416" Text="商品编号" Width="100" />
+                <TextBlock  Foreground="#FFEB6416" Text="商品数量" Width="100"/>
+                <TextBlock  Foreground="#FFEB6416" Text="价格" Width="100"/>
+                <TextBlock  Foreground="#FFEB6416" Text="收益" Width="100"/>
+                <TextBlock  Foreground="#FFEB6416" Text="时间" Width="150"/>
+
+            </StackPanel>
+            <ListView x:Name="mouthListView" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding codeOfCMD}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding nameOfCMD}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding incomeNums}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding priceOfIncome}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding sellNums}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="5" Text="{Binding priceOfSell}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="6" Text="{Binding balanceOfCMD}"/>
-                        </Grid>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock  Foreground="Black" Text="{Binding Type}" Width="80"/>
+                            <TextBlock  Foreground="Black" Text="{Binding nameOfCMD}" Width="100"/>
+                            <TextBlock  Foreground="Black" Text="{Binding codeOfCMD}" Width="100"/>
+                            <TextBlock  Foreground="Black" Text="{Binding numbers}" Width="100"/>
+                            <TextBlock  Foreground="Black" Text="{Binding price}" Width="100"/>
+                            <TextBlock  Foreground="Black" Text="{Binding Category}" Width="100"/>
+                            <TextBlock  Foreground="Black" Text="{Binding Time}" Width="150"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

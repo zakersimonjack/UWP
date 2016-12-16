@@ -33,101 +33,103 @@
 
     </Page.Resources>
     <Grid x:Name="LayoutRoot">
-        <Button x:Name="logout" Click="logout_Click_1" Content="注销" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,0"></Button>
-        <Hub>
-            <Hub.Header>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.7*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <Image Stretch="Fill" Height="80" Source="Skin/logo.png"/>
                     <TextBlock Margin="12,0,0,0" Foreground="Orange" FontSize="40" VerticalAlignment="Center" Text="超市管理系统"/>
                     
                 </StackPanel>
-            </Hub.Header>
-            <HubSection x:Name="_columnItem" Foreground="Black">
-                <DataTemplate>
-                    <Grid>
+            </Grid>
+            <Grid Grid.Row="1" x:Name="_columnItem" >
+                <Grid x:Name="buttonGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ManageAccount" Click="ManageAccount_Click" Margin="8" Style="{StaticResource ButtonStyle1}">
+                        <Grid>
+                            <Image Source="Images/setlogo.png" Stretch="Fill"/>
+                            <TextBlock Text="管理账号" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="Sell_Tile" Click="Sell_Tile_Click" Margin="8" Style="{StaticResource ButtonStyle1}" Grid.Column="1">
+                        <Grid>
+                            <Image Source="Images/outlogo.png" Stretch="Fill"/>
+                            <TextBlock Text="售货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                            <TextBlock Text="{Binding SummaryMoneyOfSellCommodity}" x:Name="SummaryMoneyOfSellCommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="Income_Tile" Margin="8" Grid.Row="1" Grid.Column="0" Click="Income_Tile_Click" Style="{StaticResource ButtonStyle1}" >
+                        <Grid>
+                            <Image Source="Images/inlogo.png" Stretch="Fill"/>
+                            <TextBlock Text="进货" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontSize="20"/>
+                            <TextBlock Text="{Binding SummaryMoneyOfInCommodity}" x:Name="SummaryMoneyOfcommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"/>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="SearchToday" Margin="8" Grid.Column="0" Grid.Row="5" Click="SearchToday_Click" Style="{StaticResource ButtonStyle1}">
+                        <Grid>
+                            <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
+                            <TextBlock Text="日报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                        </Grid>
+                    </Button>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Button x:Name="MouthReport" Margin="8" Grid.Column="0" Grid.Row="2" Click="MouthReport_Click" Style="{StaticResource ButtonStyle1}">
+                        <Grid>
+                            <Image Source="Images/mlogo.png" Stretch="Fill"></Image>
+                            <TextBlock Text="月报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" FontSize="20"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="YearReport" Margin="8" Grid.Column="1" Grid.Row="2" Click="YearReport_Click" Style="{StaticResource ButtonStyle1}">
+                        <Grid>
+                            <Image Source="Images/ylogo.png" Stretch="Fill"/>
+                            <TextBlock Text="年报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                        </Grid>
+                    </Button>
 
-                        <StackPanel x:Name="StackPanel1" Orientation="Horizontal" Grid.Row="0">
-                            <Button x:Name="Income_Tile" Click="Income_Tile_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/inlogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="进货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
-                                    <TextBlock Text="{Binding SummaryMoneyOfInCommodity}" x:Name="SummaryMoneyOfcommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"/>
-                                </Grid>
-                            </Button>
-                            <Button x:Name="Sell_Tile" Click="Sell_Tile_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/outlogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="售货" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
-                                    <TextBlock Text="{Binding SummaryMoneyOfSellCommodity}" x:Name="SummaryMoneyOfSellCommodity" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontSize="15"></TextBlock>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
+                    <Button x:Name="SearchOfCommodity" Margin="8" Grid.Row="3" Grid.Column="0" Click="SearchOfCommodity_Click" Style="{StaticResource ButtonStyle1}" >
+                        <Grid>
+                            <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
+                            <TextBlock Text="管理商品" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="ManageAccount2" Grid.Row="3" Grid.Column="1" Click="ManageAccount_Click" Margin="8" Style="{StaticResource ButtonStyle1}">
+                        <Grid>
+                            <Image Source="Images/setlogo.png" Stretch="Fill"/>
+                            <TextBlock Text="管理账号" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
+                        </Grid>
+                    </Button>
 
-                        <StackPanel x:Name="StackPanel2" Orientation="Horizontal" Margin="0,12" Grid.Row="1">
-                            <Button x:Name="SearchOfCommodity" Click="SearchOfCommodity_Click" Style="{StaticResource ButtonStyle1}" >
-                                <Grid>
-                                    <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
-                                    <TextBlock Text="查询商品" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
-                                </Grid>
-                            </Button>
-                            <Button x:Name="SearchToday" Click="SearchToday_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/searchlogo.png" Stretch="Fill"></Image>
-                                    <TextBlock Text="查询当天详情" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel x:Name="Stackpanel3" Grid.Row="3" Orientation="Horizontal" Margin="0,12">
-                            <Button x:Name="MouthReport" Click="MouthReport_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/mlogo.png" Stretch="Fill"></Image>
-                                    <TextBlock Text="月报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" FontSize="20"></TextBlock>
-                                </Grid>
-                            </Button>
-                            <Button x:Name="YearReport" Click="YearReport_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/ylogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="年报表" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"></TextBlock>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel x:Name="StackPanel3" Grid.Row="4" Orientation="Horizontal">
-                            <Button x:Name="Chart" Click="Chart_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/piclogo.png" Stretch="Fill"></Image>
-                                    <TextBlock Text="图表分析" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
-                                </Grid>
-                            </Button>
-                            <Button x:Name="ManageAccount" Click="ManageAccount_Click" Style="{StaticResource ButtonStyle1}">
-                                <Grid>
-                                    <Image Source="Images/setlogo.png" Stretch="Fill"/>
-                                    <TextBlock Text="管理账号" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" FontSize="20"/>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </HubSection>
-            <HubSection x:Name="_historyItem" Foreground="Black" HorizontalContentAlignment="Stretch">
+                </Grid>
+
+            </Grid>
+            
+        <!--<HubSection x:Name="_historyItem" Foreground="Black" HorizontalContentAlignment="Stretch">
                 <HubSection.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="今日账单情况" Margin="0,0,5,0"/>
                     </StackPanel>
                 </HubSection.Header>
                 <DataTemplate>
-                    <ListView x:Name="listToday" ItemsSource="{Binding Source={StaticResource cvs1}}">
+                    <ListView x:Name="todayListView" ItemsSource="{Binding}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -138,25 +140,72 @@
                                 <Grid x:Name="grid" Width="370">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="6*"></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <!--<TextBlock Grid.Column="0" Foreground="#FFEB6416" Text="{Binding Type, Converter={StaticResource VoucherTypeConverter}}"/>-->
-                                    <TextBlock Grid.Column="1" Foreground="#FFEB6416" Text="{Binding Money}" />
-                                    <!--<TextBlock Grid.Column="2" Foreground="#FFEB6416" Text="{Binding Desc, Converter={StaticResource VoucherDescConverter}}"/>-->
-                                    <TextBlock Grid.Column="3" Foreground="#FFEB6416" Text="{Binding DT}" FontSize="10"/>
-                                    <TextBlock Grid.Column="4" Foreground="#FFEB6416" Text="{Binding Category}"/>
+                                   <TextBlock Grid.Column="0" Foreground="#FFEB6416" Text="{Binding Type}"/>
+                                    <TextBlock Grid.Column="1" Foreground="#FFEB6416" Text="{Binding nameOfCMD}" />
+                                    <TextBlock Grid.Column="2" Foreground="#FFEB6416" Text="{Binding codeOfCMD}" />
+                                    <TextBlock Grid.Column="3" Foreground="#FFEB6416" Text="{Binding numbers}"/>
+                                    <TextBlock Grid.Column="4" Foreground="#FFEB6416" Text="{Binding price}" FontSize="10"/>
+                                    <TextBlock Grid.Column="5" Foreground="#FFEB6416" Text="{Binding Category}"/>
+            -->
                                     <!-- 此处绑定的数据 根据情况而定
                                     -->
 
-                                </Grid>
+                      <!--        </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </DataTemplate>
-            </HubSection>
-        </Hub>
+            </HubSection>  -->
+          
+        </Grid>
+        <Grid Grid.Column="1" Grid.ColumnSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="今日流水账：" Margin="12" FontSize="35" SelectionChanged="TextBlock_SelectionChanged"/>
+                    <Button x:Name="backButton" Margin="550,0,0,0" Click="backButton_Click"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
+                    <Button x:Name="Chart" Click="Chart_Click" Visibility="Collapsed" IsEnabled="False"/>
+                    <Button x:Name="logout" Click="logout_Click_2" Visibility="Collapsed" IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                   
+                        <TextBlock  Foreground="#FFEB6416" Text="类型" Width="80"/>
+                        <TextBlock  Foreground="#FFEB6416" Text="商品名称" Width="100" />
+                    <TextBlock  Foreground="#FFEB6416" Text="商品编号" Width="100" />
+                    <TextBlock  Foreground="#FFEB6416" Text="商品数量" Width="100"/>
+                    <TextBlock  Foreground="#FFEB6416" Text="价格" Width="100"/>
+                    <TextBlock  Foreground="#FFEB6416" Text="收益" Width="100"/>
+                    <TextBlock  Foreground="#FFEB6416" Text="时间" Width="150"/>
+
+                </StackPanel>
+            </StackPanel>
+            <ListView x:Name="todayListView" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding Type}" Width="80"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding nameOfCMD}" Width="100"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding codeOfCMD}" Width="100"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding numbers}" Width="100"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding price}" Width="100"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding Category}" Width="100"/>
+                            <TextBlock  Foreground="#FFEB6416" Text="{Binding Time}" Width="150"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
+  
 </Page>

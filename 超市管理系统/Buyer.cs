@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace 超市管理系统 {
     class Buyer :Staff {
 
-        public Buyer() {
-            level = Level.buyer;
+        public Buyer(Level level, string loginName, string password, string name) : base(level, loginName, password, name) {
         }
 
         public bool isCommodityExist(string name) {

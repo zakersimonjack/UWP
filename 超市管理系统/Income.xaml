@@ -58,15 +58,8 @@
                 <TextBlock Text="商品进货价：" Margin="12,5,0,0" FontSize="20"/>
                 <TextBox x:Name="incomePriceTextbox" Grid.Row="1" Margin="12,5,12,10"/>
             </Grid>
+           
             <Grid Grid.Row="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="商品售价：" Margin="12,5,0,0" FontSize="20"/>
-                <TextBox x:Name="sellPriceTextbox" Grid.Row="1" Margin="12,5,12,10"/>
-            </Grid>
-            <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="2*"/>
@@ -74,7 +67,7 @@
                 <TextBlock Text="进货数量：" Grid.Row="0" Margin="12,5,0,0" FontSize="20"/>
                 <TextBox x:Name="incomeNumsTextbox" Grid.Row="1" Margin="12,5,12,12"  InputScope="Number"/>
             </Grid>
-            <StackPanel Grid.Row="5">
+            <StackPanel Grid.Row="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>

@@ -49,9 +49,9 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Image Source="Images\acount.png" ></Image>
-                <TextBox x:ConnectionId='3' x:Name="loginNameTB" FontSize="25" Grid.Row="0" Grid.Column="1" Margin="15"/>
+                <TextBox x:ConnectionId='3' x:Name="loginNameTB"  Grid.Row="0" Grid.Column="1" Margin="15"/>
                 <Image Source="Images/key.jpg" Grid.Row="1"/>
-                <PasswordBox x:ConnectionId='4' x:Name="passWordBox" FontSize="25" Grid.Row="1" Grid.Column="1" Margin="15"/>
+                <PasswordBox x:ConnectionId='4' x:Name="passWordBox" Grid.Row="1" Grid.Column="1" Margin="15"/>
             </Grid>
             <Grid Grid.Row="2" Margin="12">
                 <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:ConnectionId='1' x:Name="loginButton"                             Content="登陆" FontSize="40" Grid.Column="0" HorizontalAlignment="Center" Margin="89,15,69,15" Width="212"/>
-                <Button x:ConnectionId='2' x:Name="forgetButton"                            FontSize="40" Content="忘记密码" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Visibility="Collapsed">
+                <Button x:ConnectionId='2' x:Name="forgetButton"                            FontSize="40" Content="忘记密码" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
 
                 </Button>
             </Grid>

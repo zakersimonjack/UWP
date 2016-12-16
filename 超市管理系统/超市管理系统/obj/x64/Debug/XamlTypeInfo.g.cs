@@ -132,7 +132,7 @@ namespace 超市管理系统.超市管理系统_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[12];
+            _typeNameTable = new string[9];
             _typeNameTable[0] = "超市管理系统.Income";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -140,13 +140,10 @@ namespace 超市管理系统.超市管理系统_XamlTypeInfo
             _typeNameTable[4] = "超市管理系统.MainPage";
             _typeNameTable[5] = "超市管理系统.manageAcount1";
             _typeNameTable[6] = "超市管理系统.manageCMD";
-            _typeNameTable[7] = "超市管理系统.modifyPassword";
-            _typeNameTable[8] = "超市管理系统.MouthReport";
-            _typeNameTable[9] = "超市管理系统.sellPage";
-            _typeNameTable[10] = "超市管理系统.todayReport";
-            _typeNameTable[11] = "超市管理系统.YearReport";
+            _typeNameTable[7] = "超市管理系统.MouthReport";
+            _typeNameTable[8] = "超市管理系统.sellPage";
 
-            _typeTable = new global::System.Type[12];
+            _typeTable = new global::System.Type[9];
             _typeTable[0] = typeof(global::超市管理系统.Income);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -154,11 +151,8 @@ namespace 超市管理系统.超市管理系统_XamlTypeInfo
             _typeTable[4] = typeof(global::超市管理系统.MainPage);
             _typeTable[5] = typeof(global::超市管理系统.manageAcount1);
             _typeTable[6] = typeof(global::超市管理系统.manageCMD);
-            _typeTable[7] = typeof(global::超市管理系统.modifyPassword);
-            _typeTable[8] = typeof(global::超市管理系统.MouthReport);
-            _typeTable[9] = typeof(global::超市管理系统.sellPage);
-            _typeTable[10] = typeof(global::超市管理系统.todayReport);
-            _typeTable[11] = typeof(global::超市管理系统.YearReport);
+            _typeTable[7] = typeof(global::超市管理系统.MouthReport);
+            _typeTable[8] = typeof(global::超市管理系统.sellPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -198,11 +192,8 @@ namespace 超市管理系统.超市管理系统_XamlTypeInfo
         private object Activate_4_MainPage() { return new global::超市管理系统.MainPage(); }
         private object Activate_5_manageAcount1() { return new global::超市管理系统.manageAcount1(); }
         private object Activate_6_manageCMD() { return new global::超市管理系统.manageCMD(); }
-        private object Activate_7_modifyPassword() { return new global::超市管理系统.modifyPassword(); }
-        private object Activate_8_MouthReport() { return new global::超市管理系统.MouthReport(); }
-        private object Activate_9_sellPage() { return new global::超市管理系统.sellPage(); }
-        private object Activate_10_todayReport() { return new global::超市管理系统.todayReport(); }
-        private object Activate_11_YearReport() { return new global::超市管理系统.YearReport(); }
+        private object Activate_7_MouthReport() { return new global::超市管理系统.MouthReport(); }
+        private object Activate_8_sellPage() { return new global::超市管理系统.sellPage(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -257,37 +248,16 @@ namespace 超市管理系统.超市管理系统_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 7:   //  超市管理系统.modifyPassword
+            case 7:   //  超市管理系统.MouthReport
                 userType = new global::超市管理系统.超市管理系统_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_7_modifyPassword;
+                userType.Activator = Activate_7_MouthReport;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  超市管理系统.MouthReport
+            case 8:   //  超市管理系统.sellPage
                 userType = new global::超市管理系统.超市管理系统_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_MouthReport;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 9:   //  超市管理系统.sellPage
-                userType = new global::超市管理系统.超市管理系统_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_sellPage;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 10:   //  超市管理系统.todayReport
-                userType = new global::超市管理系统.超市管理系统_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_10_todayReport;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 11:   //  超市管理系统.YearReport
-                userType = new global::超市管理系统.超市管理系统_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_11_YearReport;
+                userType.Activator = Activate_8_sellPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
