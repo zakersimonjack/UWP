@@ -50,7 +50,7 @@
                 </Grid.RowDefinitions>
                 <Image Source="Images\acount.png" ></Image>
                 <TextBox x:ConnectionId='3' x:Name="loginNameTB" FontSize="25" Grid.Row="0" Grid.Column="1" Margin="15"/>
-                <Image Source="Images/key.jpg" Grid.Row="1"/>
+                <Image Source="Images/key.jpg" Grid.Row="1" Margin="12"/>
                 <PasswordBox x:ConnectionId='4' x:Name="passWordBox" FontSize="25" Grid.Row="1" Grid.Column="1" Margin="15"/>
             </Grid>
             <Grid Grid.Row="2" Margin="12">

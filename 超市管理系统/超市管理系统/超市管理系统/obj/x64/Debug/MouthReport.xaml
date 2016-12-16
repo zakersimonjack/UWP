@@ -14,7 +14,7 @@
         <StackPanel Grid.Row="0" VerticalAlignment="Top" Orientation="Horizontal">
             <Button x:ConnectionId='6' x:Name="backButton"                          Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Center"/>
             <TextBlock x:ConnectionId='7' x:Name="PageTitle" Margin="12,0,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-           
+            <DatePicker x:ConnectionId='8'  x:Name="mouthPicker"                                       ></DatePicker>
         </StackPanel>
         <Grid x:ConnectionId='1' x:Name="ContenPanel" Grid.Row="1" Margin="12 0 0 0">
             <Grid.RowDefinitions>
@@ -69,12 +69,12 @@
     </Grid>
     <Page.BottomAppBar >
         <CommandBar>
-            <AppBarButton x:ConnectionId='8' Label="上一月"                                       >
+            <AppBarButton x:ConnectionId='9' Label="上一月"                                       >
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Images/appbar.First.rest.png"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:ConnectionId='9' Label="下一月"                                       >
+            <AppBarButton x:ConnectionId='10' Label="下一月"                                       >
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Images/appbar.Last.rest.png"/>
                 </AppBarButton.Icon>
