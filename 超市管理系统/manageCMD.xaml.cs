@@ -29,6 +29,7 @@ namespace 超市管理系统
         public manageCMD()
         {
             addItems();
+           
             this.InitializeComponent();
         }
 
@@ -158,13 +159,17 @@ namespace 超市管理系统
                     }
                     catch (NullReferenceException e)
                     {
-                        await new MessageDialog("正在加载商品名单").ShowAsync();
+                        await new MessageDialog("加载商品名单成功").ShowAsync();
                     }
                 }
                 try
                 {
                     if (nameList[0].num != 0)
+                    {
                         nameComboBox.Items.Add(nameList[0].commodityName);
+                        nameComboBox.SelectedIndex = 0;
+                    }
+
                 }
                 catch (NullReferenceException e)
                 {
@@ -186,42 +191,58 @@ namespace 超市管理系统
         /// <param name="e"></param>
         private async void deleteAllCMD_Click(object sender, RoutedEventArgs e)
         {
-            string name = nameComboBox.SelectedItem.ToString();
-
-            CommodityMessage ms = new CommodityMessage();
-            foreach (var cm in nameList)
+            string name = "";
+            try
             {
-                if (cm.commodityName == name)
+              name = nameComboBox.SelectedItem.ToString();
+            }
+            catch (NullReferenceException)
+            {
+                await new MessageDialog("请选择一项商品进行清空库存").ShowAsync();
+                return;
+            }
+            
+                CommodityMessage ms = new CommodityMessage();
+                foreach (var cm in nameList)
                 {
-                    ms = cm;
-                    break;
+                    if (cm.commodityName == name)
+                    {
+                        ms = cm;
+                        break;
+                    }
+                }
+                if (ms.commodityName != "")
+                {
+                    var dialog = new ContentDialog()
+                    {
+                        Title = "消息提示",
+                        Content = "您要清空" + name + "的库存吗？",
+                        PrimaryButtonText = "确定",
+                        SecondaryButtonText = "取消",
+                        FullSizeDesired = false,
+                    };
+
+                    dialog.PrimaryButtonClick += async (_s, _e) =>
+                    {
+
+                        if (manager.clearRepo(ms.id))
+                        {
+                            await new MessageDialog("清空" + ms.commodityName + "成功").ShowAsync();
+                        }
+                        else
+                        {
+                            await new MessageDialog("清空" + ms.commodityName + "失败").ShowAsync();
+                        }
+
+
+                    };
+                    await dialog.ShowAsync();
+
                 }
             }
-            var dialog = new ContentDialog()
-            {
-                Title = "消息提示",
-                Content = "您要清空" + name + "的库存吗？",
-                PrimaryButtonText = "确定",
-                SecondaryButtonText = "取消",
-                FullSizeDesired = false,
-            };
-
-            dialog.PrimaryButtonClick += async (_s, _e) =>
-            {
+           
                 
-                  if(manager.clearRepo(ms.id))
-                  {
-                      await new MessageDialog("清空"+ms.commodityName+"成功").ShowAsync();
-                  }
-                  else
-                {
-                    await new MessageDialog("清空" + ms.commodityName + "失败").ShowAsync();
-                }
-                  
-               
-            };
-            await dialog.ShowAsync();
-
-        }
+            
+        
     }
 }

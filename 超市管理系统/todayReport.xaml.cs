@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -66,7 +67,14 @@ namespace 超市管理系统
             List<LogMessage> dayList = new List<LogMessage>();
             DateTime dt = dayPicker.Date.Date;
 
-            dayList = manager.getLogMessageByDay(dt);
+            try
+            {
+                dayList = manager.getLogMessageByDay(dt);
+            }
+            catch(NullReferenceException)
+            {
+                Debug.WriteLine("当天没有日志信息");
+            }
             if(dayList!=null)
             {
                   foreach (var a in dayList)
