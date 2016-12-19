@@ -47,7 +47,7 @@ namespace 超市管理系统
             allDB.Text = "";
             PageTitle.Text = year + "年";
             List<LogMessage> yearList = new List<LogMessage>();
-
+            float allIncomeMoney = 0f;
 
             DateTime dt = new DateTime(year, 1, 1);
             yearList = manager.getLogMessageByYear(dt);
@@ -61,6 +61,7 @@ namespace 超市管理系统
                     if (a.flag == true)
                     {
                         type = "进货";
+                        allIncomeMoney += a.price * a.num;
                         price = a.price;
                         Catepory = "-";
                     }
@@ -78,7 +79,7 @@ namespace 超市管理系统
                 mouthListView.DataContext = yearDisplayList;
                 Money yearMoney = new Money();
                 yearMoney = manager.getAmountOfMoney(dt, flagCode.year);
-                incomeAll.Text = "总支出：" + yearMoney.inMoney.ToString();
+                incomeAll.Text = "总支出：" + allIncomeMoney.ToString();
                 sellAll.Text = "总收入：" + yearMoney.outMoney.ToString();
                 allDB.Text = "总收益：" + (yearMoney.outMoney - yearMoney.inMoney).ToString();
             }

@@ -66,6 +66,7 @@ namespace 超市管理系统
             PageTitle.Text = year + "年" + mouth + "月"+day+"日";
             List<LogMessage> dayList = new List<LogMessage>();
             DateTime dt = dayPicker.Date.Date;
+            float allincome = 0f;
 
             try
             {
@@ -77,7 +78,8 @@ namespace 超市管理系统
             }
             if(dayList!=null)
             {
-                  foreach (var a in dayList)
+                
+                foreach (var a in dayList)
              {
                  string type = "";
                  float price;
@@ -86,6 +88,7 @@ namespace 超市管理系统
                  {
                      type = "进货";
                      price = a.price;
+                        allincome += a.price * a.num;
                      Catepory = "-";
                  }
                  else
@@ -102,10 +105,12 @@ namespace 超市管理系统
             }
            
              dayListView.DataContext = dayLogList;
+          
+          
              
               Money thisDay = new Money();
             thisDay = manager.getAmountOfMoney(dt, flagCode.day);
-              incomeAll.Text = "支出："+thisDay.inMoney.ToString();
+            incomeAll.Text = "支出：" + allincome.ToString();
               sellAll.Text ="收入"+ thisDay.outMoney.ToString();
             allDB.Text = "总收益"+(thisDay.outMoney - thisDay.inMoney).ToString();
         }
