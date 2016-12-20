@@ -123,6 +123,7 @@ namespace 超市管理系统
                 lm.time += TimePicker.Time;
                 lm.price = incomePrice;
                 lm.num = num;
+                lm.discount = 1;
                 stockCode code = new stockCode();
                 DateTime dt = new DateTime();
                 dt = DateTime.Now;

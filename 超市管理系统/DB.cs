@@ -164,7 +164,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from comodity where cid = '" + com.id + "'");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) != 0) throw new RepeatException();
             send_cmd("Insert into comodity(name, cid, nums, inprice, outprice) values('" + com.commodityName + "','" + com.id + "','" + com.num.ToString() + "','" + com.inPrice.ToString() + "','" + com.outPrice.ToString() + "');");
             return true;
@@ -179,7 +179,7 @@ namespace 超市管理系统
             send_cmd("select * from comodity where cid = '" + id + "'");
             while (read_flag) //Task.Delay(100);
                 Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
             buf.Dequeue();
             cmes.commodityName = buf.Dequeue();
@@ -199,7 +199,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from comodity where name = '" + name + "'");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
             buf.Dequeue();
             cmes.commodityName = buf.Dequeue();
@@ -246,7 +246,7 @@ namespace 超市管理系统
 
             while (read_flag) Task.Delay(100);
 
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
 
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
 
@@ -308,7 +308,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
             int j = Convert.ToInt32(buf.Dequeue());
@@ -351,7 +351,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "' and month = '" + month.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
             int j = Convert.ToInt32(buf.Dequeue());
@@ -394,7 +394,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from clog where year ='" + year.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
             int j = Convert.ToInt32(buf.Dequeue());
@@ -457,7 +457,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from staff where loginname = '" + p.loginName + "'");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) != 0) throw new RepeatException();
             send_cmd("Insert into staff(name, pwd, loginname, power) values('" + p.name + "','" + p.password + "','" + p.loginName + "','" + get_level(p.level).ToString() + "');");
             return true;
@@ -479,7 +479,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from staff where loginname = '" + loginName + "'");
             while (read_flag) await Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             if (Convert.ToInt32(buf.Dequeue()) == 0) throw new NotFindException();
             string aaa = buf.Dequeue();
             staff.name = buf.Dequeue();
@@ -498,7 +498,7 @@ namespace 超市管理系统
             buf.Clear();
             send_cmd("select * from staff");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             int i;
             if ((i = Convert.ToInt32(buf.Dequeue())) == 0) throw new NotFindException();
             int j = Convert.ToInt32(buf.Dequeue());
@@ -528,16 +528,16 @@ namespace 超市管理系统
             Money mon = new Money();
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.inMoney = Convert.ToSingle(buf.Dequeue());
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "' and day = '" + day.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.outMoney = Convert.ToSingle(buf.Dequeue());
             return mon;
@@ -548,16 +548,16 @@ namespace 超市管理系统
             Money mon = new Money();
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '1' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.inMoney = Convert.ToSingle(buf.Dequeue());
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '0' and year = '" + year.ToString() + "' and month = '" + month.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue(); buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.outMoney = Convert.ToSingle(buf.Dequeue());
             return mon;
@@ -569,17 +569,17 @@ namespace 超市管理系统
             mon.outMoney = 0;
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '1' and year = '" + year.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '1' and year = '" + year.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue();
             buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.inMoney = Convert.ToSingle(buf.Dequeue());
             read_flag = true;
             buf.Clear();
-            send_cmd("select sum(price * nums) from clog where flag = '0' and year = '" + year.ToString() + "';");
+            send_cmd("select sum(price * nums * discount) from clog where flag = '0' and year = '" + year.ToString() + "';");
             while (read_flag) Task.Delay(100);
-            if (string.Compare(error_str, 1, buf.Peek(), 1, error_str.Length) == 0) throw new FatalSQLException();
+            if (string.Compare(error_str, 0, buf.Peek(), 0, error_str.Length) == 0) throw new FatalSQLException();
             buf.Dequeue();
             buf.Dequeue();
             if (string.Compare(null_str, 0, buf.Peek(), 0, null_str.Length) != 0) mon.outMoney = Convert.ToSingle(buf.Dequeue());

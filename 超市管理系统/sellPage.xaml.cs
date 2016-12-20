@@ -34,6 +34,8 @@ namespace 超市管理系统
             {
                 discountComboBox.Items.Add(i + "折");
             }
+            discountComboBox.SelectedIndex = 9;
+            
             
         }
 
